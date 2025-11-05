@@ -1,0 +1,258 @@
+.send-board {
+	background: #fbfcfe;
+	align-items: flex-end;
+	min-height: 49px;
+	position: relative;
+	padding: 8px 80px 4px;
+	width: 100%;
+	textarea::-webkit-input-placeholder {
+		color: #c8cad0;
+	}
+	.menus-menus-but {
+		position: absolute;
+		left: 0px;
+        bottom: 16px;
+		cursor: pointer;
+		-webkit-user-drag: none;
+	}
+	.menus-menus-but-web {
+		position: absolute;
+		left: 12px;
+        bottom: 16px;
+		cursor: pointer;
+		-webkit-user-drag: none;
+	}
+
+	.emoji-item {
+		position: absolute;
+		left: 26px;
+        bottom: 16px;
+        cursor: pointer;
+	}
+	.emoji-item-web {
+		position: absolute;
+		left: 40px;
+        bottom: 16px;
+        cursor: pointer;
+	}
+	.screenshot {
+		position: absolute;
+		left: 52px;
+        bottom: 16px;
+        cursor: pointer;
+	}
+
+	.send-but-wrape {
+		position: absolute;
+		right: 16px;
+		bottom: 12px;
+	}
+
+	input {
+		background: #fbfcfe;
+		box-shadow: none !important;
+		outline: none !important;
+	}
+
+	.send-item {
+		display: block;
+		margin-right: 20px;
+
+		&:last-child {
+			margin-right: 0px;
+		}
+	}
+
+	i.send-item {
+		font-size: 20px;
+		cursor: pointer;
+	}
+
+	.mention-wraper {
+		border: none;
+		box-shadow: none;
+		font-size: 14px;
+		height: 38px;
+	}
+
+	.forbit {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.1);
+		z-index: 9;
+		text-align: center;
+		line-height: 48px;
+		color: #b54949;
+	}
+}
+
+.send-list {
+	max-width: 116px;
+
+	.item {
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 36px 0 14px;
+		text-align: center;
+
+		img {
+			max-height: 24px;
+			max-width: 24px;
+			margin-right: 12px;
+		}
+
+		&:hover {
+			background: #d0e6fd;
+		}
+	}
+}
+// .ant-carousel .slick-slide {
+// 	text-align: center;
+// 	height: 160px;
+// 	line-height: 160px;
+// 	background: #364d79;
+// 	overflow: hidden;
+//   }
+
+//   .ant-carousel .slick-slide h3 {
+// 	color: #fff;
+//   }
+.divider{
+	margin: 0px!important;
+}
+.ant-popover-inner-content {
+    padding: 2px 0px 2px 0px!important;
+}
+.imoglist{
+	// width: 322px;
+	width:330px;
+	.imojiPanel {
+	    // display: flex;
+		overflow-y: auto;
+		padding: 0px 5px;
+		margin: 0;
+		img {
+			max-height: 30px;
+			max-width: 30px;
+			padding: 3px;
+			float: left;
+			width: 10%;
+			&:hover{
+				cursor: pointer;
+				background-color: rgba(195, 193, 193, 0.69);
+				filter:alpha(Opacity=80);
+				-moz-opacity:0.8;
+				opacity: 0.8
+			}
+		}
+
+		-ms-overflow-style: none;
+		 height: 100%;
+		 height: 180px;
+		// width: calc(100vw + 18px);
+		overflow: auto;
+		//
+		// width: 264px;
+	}
+	.addimogPanl {
+		display: flex!important;
+		flex-wrap: wrap;
+		overflow-y: auto;
+		padding: 0px 10px;
+		margin: 0;
+		// align-items:center
+		img {
+			max-height: 50px;
+			max-width: 50px;
+			padding: 3px;
+			float: left;
+			&:hover{
+				cursor: pointer;
+				// background-color: rgba(109, 106, 106, 0.884);
+				// filter:alpha(Opacity=80);
+				// -moz-opacity:0.8;
+				// opacity: 0.8
+			}
+		}
+
+		-ms-overflow-style: none;
+		 height: 100%;
+		 height: 180px;
+
+		overflow: auto;
+		//
+		// width: 264px;
+	}
+
+}
+
+
+.send-image-modal {
+	height: 280px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 0 32px;
+
+	.img-wraper {
+		display: flex;
+		flex: 1;
+		overflow: hidden;
+		align-items: center;
+		justify-content: center;
+		align-self: center;
+	}
+	.img-wraper2 {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		overflow: hidden;
+		align-items: center;
+		justify-content: center;
+		align-self: center;
+	}
+	.img-wraper3 {
+		display: flex;
+		overflow: hidden;
+		align-items: center;
+		justify-content: flex-start;
+		align-self: center;
+	}
+	.im-wraper3-icon {
+		width: 18px!important;
+		height: 18px!important;
+	}
+
+	.input-wraper {
+		height: 60px;
+		display: flex;
+		align-items: center;
+
+		.name {
+			width: 120px;
+			color: #545454;
+		}
+	}
+}
+.transmit-wrap{
+	text-align: right;
+}
+.transmit-button{
+	margin-right: 8px;
+}
+.double-withdraw{
+	position: absolute;
+    right: 60px;
+	bottom: 12px;
+	img{
+		max-width: 20px!important;
+		max-height: 20px!important;
+		margin-right: 12px!important;
+		margin-top: -9px;
+	}
+}

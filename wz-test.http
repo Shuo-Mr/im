@@ -1,0 +1,2 @@
+post '/friends/attention/add?
+Content-Type: application/x-www-form-urlencoded

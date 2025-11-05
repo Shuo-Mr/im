@@ -1,0 +1,247 @@
+@font-face {
+	font-family: 'ali-font';
+	src: url('./assets/font/Alibaba-PuHuiTi-Regular.otf');
+	// src     :
+	// url('../fonts/source.eot?#font-spider') format('embedded-opentype'),
+	// url('../assets/font/Alibaba-PuHuiTi-Regular.otf') format('otf');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ali-font';
+	src: url('./assets/font/Alibaba-PuHuiTi-Light.otf');
+	// src     :
+	// url('../fonts/source.eot?#font-spider') format('embedded-opentype'),
+	// url('../assets/font/Alibaba-PuHuiTi-Regular.otf') format('otf');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ali-font';
+	src: url('./assets/font/Alibaba-PuHuiTi-Medium.otf');
+	// src     :
+	// url('../fonts/source.eot?#font-spider') format('embedded-opentype'),
+	// url('../assets/font/Alibaba-PuHuiTi-Regular.otf') format('otf');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ali-font';
+	src: url('./assets/font/Alibaba-PuHuiTi-Bold.otf');
+	// src     :
+	// url('../fonts/source.eot?#font-spider') format('embedded-opentype'),
+	// url('../assets/font/Alibaba-PuHuiTi-Regular.otf') format('otf');
+	font-weight: 600;
+	font-style: normal;
+}
+
+body {
+	overflow: hidden;
+	// position: fixed;
+	// top: 0;
+	// left: 0;
+	// right: 0;
+	// bottom: 0;
+}
+
+*,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+ul,
+li,
+p,
+input,
+button,
+select,
+optgroup,
+textarea {
+	margin: 0;
+	padding: 0;
+	font-family: ali-font;
+	//  font-family: "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+	// font-family: "ali-font", Tahoma, "Hiragino Sans GB", "Microsoft YaHei", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+	// font-family:AlibabaPuHuiTiR;
+	// font-family: "pingFangSC";//??????   
+	font-family: PingFangSC-Regular, Microsoft YaHei; //pc????
+	font-weight: 400;
+	outline: none;
+	-webkit-user-drag: none;
+}
+
+// .font-ali{
+// 	font-family: ali-font;
+// }
+img {
+	max-width: 100%;
+	max-height: 100%;
+	height: auto;
+	width: auto;
+}
+
+#root {
+	min-width: 380px;
+	min-height: 500px;
+}
+
+.with-click {
+	&:hover {
+		cursor: pointer;
+		opacity: .8;
+	}
+
+	&:active {
+		opacity: .6;
+	}
+}
+
+.text-ellipsis-3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
+}
+
+.text-overflow-common {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.max-normal-width {
+	width: 48px;
+}
+
+.border-bottom-common {
+	border-bottom: 1px solid #efefef;
+}
+
+.title-common {
+	// color: #2c2f36;
+	color: #000000;
+	margin-right: 4px;
+}
+
+.sub-title {
+	color: #969ba5;
+}
+
+.list-item-desc {
+	cursor: pointer;
+	display: flex;
+	align-items: flex-start;
+	padding: 12px 0;
+	border-bottom: 1px solid #f0f0f0;
+
+	.left {
+		flex-shrink: 0;
+		width: 80px;
+		color: #666;
+		font-size: 14px;
+	}
+
+	.right {
+		flex: 1;
+		min-width: 0;
+		position: relative; /* 为伪元素定位 */
+	}
+
+	.right-content {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		word-break: break-word;
+		line-height: 1.4;
+		max-height: 4.2em;
+		position: relative;
+	}
+
+	/* 手动添加省略号 */
+	.right-content:after {
+		content: "...";
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding-left: 8px;
+		background: linear-gradient(to right, transparent, white 20%);
+		display: none;
+		/* 默认隐藏 */
+	}
+
+	/* 当文本溢出时显示省略号 */
+	.right-content.overflow:after {
+		display: inline-block;
+	}
+
+	&:hover {
+		opacity: .7;
+	}
+}
+
+.list-item-common {
+	line-height: 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.left {
+		// color: #2c2f36;
+		color: #222222;
+	}
+
+	.right {
+		&:extend(.sub-title);
+		display: flex;
+		align-items: center;
+	}
+
+	.right-content {
+		max-width: 230px;
+		&:extend(.text-overflow-common);
+	}
+}
+
+.list-item-common.click {
+	cursor: pointer;
+
+	&:hover {
+		opacity: .7;
+	}
+}
+
+.ant-popover-placement-top,
+.ant-popover-placement-topRight,
+.ant-popover-placement-bottomLeft,
+.ant-popover-placement-bottomRight {
+	.ant-popover-inner-content {
+		padding: 0 !important;
+	}
+}
+
+.click-common {
+	cursor: pointer;
+
+	&:hover {
+		opacity: .7;
+	}
+}
+
+#zmageControl {
+	background-color: rgba(255, 255, 255, .8) !important;
+	top: 60px !important;
+}
+
+.video-react .video-react-big-play-button {
+	top: 40% !important;
+	left: 30% !important;
+}

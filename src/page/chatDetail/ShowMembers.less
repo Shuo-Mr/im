@@ -1,0 +1,84 @@
+.members-wraper{
+    flex: 1;
+    height: 535px;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    .member-box{
+        height: 60px;
+        font-size: 12px;
+        text-align: center;
+        position: sticky;
+        // margin: 8px 0px;
+        width: 52px;
+        overflow: hidden;
+        &.forbit:after {
+            content: "-";
+            position: absolute;
+            bottom: 24px;
+            background: #d68484;
+            color: #fff;
+            height: 12px;
+            width: 12px;
+            line-height: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+          }
+    
+          .name {
+            max-width: 52px;
+            display: block;
+          }
+        &:before {
+            background: #ececec;
+            position: absolute;
+            top: -4px;
+            right: 12px;
+            font-size: 10px;
+            border-radius: 4px;
+            z-index: 9;
+          }
+        &.owner:before {
+            content: "群主";
+            right: 16px;
+          }
+    
+          &.manage:before {
+            content: "管理员";
+          }
+    }
+  
+}
+.drawer-wraper{
+  // overflow: unset!important;
+  overflow-y:unset!important;
+}
+.mems-wraper{
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  .members-wraper{
+    overflow: hidden;
+  }
+}
+.drawer-wraper .ant-drawer-body{
+  padding: 20px;
+}
+.name-item{
+    margin-left: 12px;
+    position: absolute;
+    // top: 10px;
+}
+
+// .name text-overflow-common{
+//     margin-left: 8px;
+    
+// }
+.ReactVirtualized__Grid__innerScrollContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+// .search-wraper{
+//   margin-right: 9px;
+// }

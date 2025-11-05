@@ -1,0 +1,5 @@
+Nxworld
+
+http://103.82.143.76:8093     接口地址  
+
+appid: top.Tigase.im.quanqiu

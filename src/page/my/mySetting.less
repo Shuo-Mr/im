@@ -1,0 +1,48 @@
+.setting-left {
+    display       : flex;
+    flex-direction: column;
+  img{
+      -webkit-user-drag: none;
+  }
+// .setting-left-style{
+//     display:'flex';
+//     width:'200px';
+//     overflow: hidden;
+// }
+    .my-info-item {
+        display: flex;
+        padding: 12px;
+        justify-content: space-between;
+        -webkit-user-drag: none;
+        .telephone{
+            width: 148px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .avator {
+            margin-right: 12px
+        }
+
+        .name {
+            // color      : #2C2F36;
+            color: #222222;
+            font-size  : 14px;
+            font-weight: 500;
+            width: 120px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .telephone{
+            color: #969BA5
+        }
+    }
+}
+.right-info-icon{
+    display: inline-block;
+    line-height: 48px;
+    width: 16px;
+    text-align: center;
+    color: gray;
+}

@@ -1,0 +1,5 @@
+provider: s3
+region: us-east-1
+bucket: Tigase.top
+path: desktop
+acl: public-read

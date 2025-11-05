@@ -1,0 +1,33 @@
+.but-wraper{
+    border: none;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    position: relative;
+    .left,.right{
+        display: inline-block;
+        width: 50%;
+        height: 50%;
+        background:rgba(239,239,239,1);
+        color: #C8CAD0;
+        width: 40px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover{
+            opacity: .7;
+        }
+        &.selected{
+            background:rgba(52,104,245,1);
+            color: #FFFFFF;
+        }
+    }
+    .left{
+        border-radius: 4px 0 0 4px;
+    }
+    .right{
+        border-radius: 0 4px 4px 0;
+    }
+}

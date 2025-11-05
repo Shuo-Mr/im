@@ -1,0 +1,70 @@
+.members-wraper {
+  flex: 1;
+  height: 535px;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.members-wraper .member-box {
+  height: 60px;
+  font-size: 12px;
+  text-align: center;
+  position: sticky;
+  width: 52px;
+  overflow: hidden;
+}
+.members-wraper .member-box.forbit:after {
+  content: "-";
+  position: absolute;
+  bottom: 24px;
+  background: #d68484;
+  color: #fff;
+  height: 12px;
+  width: 12px;
+  line-height: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.members-wraper .member-box .name {
+  max-width: 52px;
+  display: block;
+}
+.members-wraper .member-box:before {
+  background: #ececec;
+  position: absolute;
+  top: -4px;
+  right: 12px;
+  font-size: 10px;
+  border-radius: 4px;
+  z-index: 9;
+}
+.members-wraper .member-box.owner:before {
+  content: "群主";
+  right: 16px;
+}
+.members-wraper .member-box.manage:before {
+  content: "管理员";
+}
+.drawer-wraper {
+  overflow-y: unset!important;
+}
+.mems-wraper {
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+}
+.mems-wraper .members-wraper {
+  overflow: hidden;
+}
+.drawer-wraper .ant-drawer-body {
+  padding: 20px;
+}
+.name-item {
+  margin-left: 12px;
+  position: absolute;
+}
+.ReactVirtualized__Grid__innerScrollContainer {
+  display: flex;
+  flex-wrap: wrap;
+}

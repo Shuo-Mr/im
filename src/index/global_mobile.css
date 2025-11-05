@@ -1,0 +1,65 @@
+.back-but {
+  display: none !important;
+  margin-right: 8px;
+}
+#root {
+  min-width: 320px;
+  height: 600px;
+}
+.head-mobile {
+  display: none !important;
+}
+@media (max-width: 650px) {
+  .login > img {
+    display: none;
+  }
+  .top-title,
+  .main-avator {
+    display: none;
+  }
+  .main-wraper {
+    position: relative;
+  }
+  .main-wraper .main-header .search-wraper {
+    width: 100% !important;
+  }
+  .main-wraper .left-list {
+    width: 100%;
+  }
+  .main-wraper .left-list .chat-item {
+    max-width: 100%;
+  }
+  .main-wraper .right-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    transition: 0.2s left, 0.2s opacity ease-in-out;
+  }
+  .main-wraper .right-content .back-button {
+    display: block;
+  }
+  .main-wraper .hide.right-content {
+    left: 100%;
+    opacity: 0;
+  }
+  .back-but {
+    display: block !important;
+  }
+  .main-wraper .right-content {
+    background-color: #fff;
+  }
+  .head-mobile {
+    display: flex !important;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+    width: 8px;
+    background-color: transparent;
+  }
+  .add-screen-wrap {
+    display: flex;
+  }
+}

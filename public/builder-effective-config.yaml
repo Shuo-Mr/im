@@ -1,0 +1,74 @@
+directories:
+  output: dist
+  buildResources: public
+extraResources:
+  - from: ./src/ext-plugins
+    to: ./
+publish:
+  - provider: generic
+    url: 'http://api.Tigase.top:8083/'
+productName: 沟通
+appId: top.Tigase.im.demo
+asar: false
+mac:
+  artifactName: '${name}-${version}-osx.${ext}'
+  category: public.app-category.developer-tools
+  type: distribution
+  target:
+    - dmg
+    - zip
+  icon: build/logo.icns
+win:
+  artifactName: '${description}-Setup-${version}.${ext}'
+  icon: build/256X256.ico
+  target:
+    - nsis
+  publisherName: ' Technology Inc'
+  rfc3161TimeStampServer: 'http://timestamp.entrust.net/TSS/RFC3161sha1TS'
+files:
+  - filter:
+      - build/**
+      - node_modules/node-localstorage
+      - '!node_modules'
+      - dev-app-update.yml
+      - package.json
+dmg:
+  background: build/background.png
+  iconSize: 80
+  window:
+    width: 500
+    height: 300
+  contents:
+    - x: 135
+      'y': 190
+    - x: 370
+      'y': 190
+      type: link
+      path: /Applications
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  runAfterFinish: false
+  perMachine: true
+  allowElevation: true
+  installerIcon: build/256X256.ico
+  uninstallerIcon: build/256X256.ico
+  installerHeader: build/installerHeader.bmp
+  installerHeaderIcon: build/256X256.ico
+  installerSidebar: build/installerSidebar.bmp
+  uninstallerSidebar: build/uninstallerSidebar.bmp
+  uninstallDisplayName: 沟通
+  license: build/license_zh.txt
+  deleteAppDataOnUninstall: true
+  createDesktopShortcut: true
+  menuCategory: true
+  shortcutName: 沟通
+  displayLanguageSelector: false
+  multiLanguageInstaller: true
+  installerLanguages:
+    - zh-CN
+    - en_US
+  language: '2052'
+  unicode: true
+  include: build/installer.nsh
+electronVersion: 7.3.0

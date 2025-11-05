@@ -1,0 +1,27 @@
+.select-friend {
+    height: 320px;
+    overflow: hidden;
+    .friend-item {
+        line-height    : 40px;
+        display        : flex;
+        justify-content: space-between;
+        padding: 0 16px;
+        cursor: pointer;
+        &:hover{
+            background: #f7f7f7;
+        }
+    }
+    .name{
+        margin-left: 32px;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 200px;
+        /* height: 2px; */
+        display: block;
+        /* top: auto; */
+        position: absolute;
+        top: 0px;
+    }
+}

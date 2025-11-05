@@ -1,0 +1,197 @@
+{
+  "name": "goutong",
+  "version": "1.2.0",
+  "private": true,
+  "homepage": ".",
+  "description": "沟通",
+  "main": "build/main.js",
+  "author": "un",
+  "scripts": {
+    "web": "node ./scripts/build.js && cd ./build && http-server",
+    "ss": "npm run packWin && npm run dev",
+    "start": "node ./scripts/start.js ",
+    "s": "set CSC_IDENTITY_AUTO_DISCOVERY=false && npm run b && npm run dev",
+    "dev": "cross-env NODE_ENV=DEV && electron . --enable-logging",
+    "bobi": "set CSC_IDENTITY_AUTO_DISCOVERY=false && npm run b && rimraf dist && electron-builder --win",
+    "build": "cross-env NODE_ENV=product && electron .  --enable-logging",
+    "b": "npm run build-main-release && npm run build-render",
+    "build-render": "node ./scripts/build.js",
+    "build-main": "node ./scripts/build-electron-dev.js ",
+    "build-main-release": "node ./scripts/build-electron-prod.js ",
+    "packMac": "npm run b && rm -rf dist && electron-builder --mac",
+    "packWin": "set CSC_IDENTITY_AUTO_DISCOVERY=false && npm run b && rimraf dist && electron-builder --win",
+    "wfpx": "export CSC_LINK=pbuild/wahaha.pfx && export CSC_KEY_PASSWORD=123..com && npm run b && rimraf dist && electron-builder --win",
+    "w": "export CSC_IDENTITY_AUTO_DISCOVERY=true && npm run b && rimraf dist && electron-builder --win",
+    "p": "export CSC_IDENTITY_AUTO_DISCOVERY=true &&  npm run packMac ",
+    "packMac-noSign": "export CSC_IDENTITY_AUTO_DISCOVERY=false &&  npm run packMac ",
+    "build-web-pc": "npm run packWin && npm run build-render",
+    "test": "echo 1",
+    "pack:flow": "node scripts/aotupac",
+    "structor": "structor"
+  },
+  "dependencies": {
+    "@jridgewell/sourcemap-codec": "^1.5.5",
+    "chalk": "^4.1.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "fs-extra": "^10.1.0",
+    "http-server": "^14.1.1",
+    "postcss": "^8.5.6",
+    "react-dev-utils": "^12.0.1",
+    "sw-precache-webpack-plugin": "^1.0.0",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-manifest-plugin": "^5.0.1"
+  },
+  "build": {
+    "extraResources": [
+      {
+        "from": "./src/ext-plugins",
+        "to": "./"
+      }
+    ],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://api.Tigase.top:8083/"
+      }
+    ],
+    "productName": "沟通",
+    "appId": "top.Tigase.im.goutong",
+    "asar": false,
+    "mac": {
+      "artifactName": "${name}-${version}-osx.${ext}",
+      "category": "public.app-category.developer-tools",
+      "type": "distribution",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "build/logo.icns"
+    },
+    "win": {
+      "artifactName": "${description}-Setup-${version}.${ext}",
+      "icon": "build/2561.ico",
+      "target": [
+        "nsis"
+      ],
+      "publisherName": "沟通",
+      "rfc3161TimeStampServer": "http://timestamp.entrust.net/TSS/RFC3161sha1TS"
+    },
+    "files": [
+      "build/**",
+      "node_modules/node-localstorage",
+      "!node_modules",
+      "dev-app-update.yml",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "dmg": {
+      "background": "build/background.png",
+      "iconSize": 80,
+      "window": {
+        "width": 500,
+        "height": 300
+      },
+      "contents": [
+        {
+          "x": 135,
+          "y": 190
+        },
+        {
+          "x": 370,
+          "y": 190,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "installerIcon": "build/2561.ico",
+      "uninstallerIcon": "build/2561.ico",
+      "installerHeader": "build/installerHeader.bmp",
+      "installerHeaderIcon": "build/2561.ico",
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/uninstallerSidebar.bmp",
+      "uninstallDisplayName": "沟通",
+      "license": "build/license_zh.txt",
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true,
+      "menuCategory": true,
+      "shortcutName": "沟通",
+      "displayLanguageSelector": false,
+      "multiLanguageInstaller": true,
+      "installerLanguages": [
+        "zh-CN",
+        "en_US"
+      ],
+      "language": "2052",
+      "unicode": true,
+      "include": "build/installer.nsh"
+    }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!**/*.d.ts"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.(j|t)s?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      ".+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+      ".+\\.tsx?$": "<rootDir>/config/jest/typescriptTransform.js",
+      ".+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+    ],
+    "moduleNameMapper": {
+      "react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "web.js",
+      "js",
+      "web.jsx",
+      "jsx",
+      "json",
+      "node",
+      "mjs"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "/Users/unsilence/Documents/zzwork/mixin-electron/tsconfig.test.json"
+      }
+    }
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "html-webpack-plugin": "^5.6.4",
+    "mini-css-extract-plugin": "^2.9.4",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^5.1.4"
+  }
+}

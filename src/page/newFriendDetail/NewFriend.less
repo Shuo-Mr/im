@@ -1,0 +1,108 @@
+@subText: #969BA5;
+
+.new-friend {
+    height        : 100%;
+    display       : flex;
+    flex          : 1;
+    flex-direction: column;
+
+    .head {
+        line-height  : 60px;
+        display       : inline-flex;
+        flex-direction: row;
+        // padding-left : 20px;
+        // color        : #2C2F36;
+        color: #222222;
+        font-weight  : 500;
+        // border-bottom: 1px solid #EFEFEF;
+        font-size    : 16px;
+        margin-left: 20px;
+        .back-but{
+            line-height: 60px;
+        }
+        // .head-title{
+            
+        // }
+      
+    }
+    .divider{
+        margin: 0px;
+    }
+
+    .body-list {
+        //  margin   : 0px 5px;
+        // overflow-y: auto;
+        // display        : flex;
+        // height: 100%;
+        //  width: 100%;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        flex: 1;
+        overflow-x: hidden;
+		// overflow-y: scroll;
+        .list-item {
+            // display        : flex;
+            // justify-content: space-between;
+            height: 64px;
+            display: block;
+			display: flex;
+			justify-content: space-between;
+            align-items: center;
+            padding: 0 16px 0 8px;
+            min-height: 64px;
+            .info-item {
+                display    : flex;
+                align-items: center;
+                line-height  : 55px;
+                img.myhead{
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 60px;
+                }
+                .name-wraper {
+                    display       : inline-flex;
+                    flex-direction: column;
+                    margin-left   : 8px;
+
+                    .name {
+                        // color      : #2C2F36;
+                        color: #222222;
+                        // font-weight: 500;
+                        line-height: 22px;
+                    }
+
+                    .sub-name {
+                        color        : @subText;
+                        line-height  : 22px;
+                        max-width    : 400px;
+                        overflow     : hidden;
+                        text-overflow: ellipsis;
+                        white-space  : nowrap;
+                    }
+                }
+            }
+        }
+
+        .but-wraper {
+            display        : flex;
+            width          : 108px;
+            justify-content: space-between;
+        }
+
+        .status-text {
+            .primary-button{
+                margin: 0px 5px;
+            }
+            color: @subText
+        }
+
+        .status-agree {
+            color: #1890ff;
+        }
+
+        .status-refuse {
+            color: #f5222d;
+        }
+    }
+}

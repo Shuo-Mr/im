@@ -1,0 +1,76 @@
+.progress {
+	&_wraper {
+		width: 100%;
+        padding: 8px;
+        padding-bottom:0;
+		line-height: 100%;
+		flex-direction: row;
+        display: flex;
+        align-items: center;
+	}
+	&_left {
+		position: relative;
+		height: 8px;
+		display: flex;
+		flex: 1;
+	}
+	&_bottom {
+		width: 100%;
+		height: 100%;
+		background: rgba(167, 186, 187, 0.2);
+		border-radius: 4px;
+		position: relative;
+	}
+	&_top {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		border-radius: 4px;
+		width: 0%;
+        height: 100%;
+        background-color:#1890ff ;
+        transition: width 1s ease-in-out;
+        position: relative;
+        background-size: 100px 30px, 130px 30px, 130px 30px;
+        background-position: -20% center, right center, left center;
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        background-image: linear-gradient(90deg, rgba(226, 4, 22, 0) 10%, rgba(6, 120, 250, 0.8) 30%, #1f91fb 70%, rgba(6, 120, 250, 0.8) 80%, rgba(4, 100, 226, 0) 90%), linear-gradient(to right, rgba(31, 134, 251, 0) 0%, #1f77fb 100%), linear-gradient(to left, rgba(31, 126, 251, 0) 0%, #1f7efb 100%);
+        animation: grow 1s ease-out infinite
+    }
+    // &_top:before{
+    //     content: "";
+    //     position: absolute;
+    //     right: -1px;
+    //     top: -10px;
+    //     width: 1px;
+    //     height: 10px;
+    //     width: 7px;
+    //     right: -4px;
+    //     background: -webkit-radial-gradient(center, ellipse, rgba(89, 178, 201, 0.4) 0%, rgba(44, 193, 219, 0) 75%);
+    //     background: radial-gradient(ellipse at center, rgba(89, 178, 201, 0.4) 0%, rgba(44, 193, 219, 0) 75%);
+    // }
+    // &_top:after{
+    //     content: "";
+    //     position: absolute;
+    //     right: -1px;
+    //     top: 4px;
+    //     width: 1px;
+    //     height: 1px;
+    //     background:linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.3) 75%, rgba(255, 255, 255, 0) 100%);
+    // }
+	&_right {
+		display: inline-block;
+        margin-left: 8px;
+        font-size: 12px;
+        color: #888;
+	}
+}
+@keyframes grow{
+    0% {
+        background-position: -50% center, right center, left center;
+    }
+    100% {
+        background-position: 150% center, right center, left center;
+    }
+}
