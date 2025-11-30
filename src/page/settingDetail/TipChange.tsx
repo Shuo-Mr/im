@@ -33,7 +33,7 @@ class TipChange extends React.Component<TipChangeProps, TipChangeState> {
   public render() {
     let tipSwitch:number = (localStorage.getItem('_tipSwitch') ? 0 : 1)
     return (
-      <div style={{padding:'40px 20px'}}>
+      <div style={{padding:'40px 20px', color: 'var(--primary-text-color)'}}>
         <div>
           消息提示音开关：
           <Switch defaultChecked={!!(tipSwitch)} key={tipSwitch} onChange={this.setTip}></Switch>

@@ -82795,7 +82795,7 @@ function createWindow() {
         titleBarStyle: 'customButtonsOnHover',
     });
     // 调试模式
-    // win.webContents.openDevTools({mode:'right'})
+    win.webContents.openDevTools({ mode: 'right' });
     // 加载应用
     var staticIndexPath = path.join(electron_1.app.getAppPath(), './build/index.html');
     var main = IS_DEV ? "http://localhost:3000" : url.format({

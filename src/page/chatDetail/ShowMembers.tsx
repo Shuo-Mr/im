@@ -34,6 +34,9 @@ export interface IShowMembersState {
 	memeberList: any[],
 }
 export class ShowMembers extends React.Component<IShowMembersProps, IShowMembersState> {
+	private filteredListCache: GroupMemItem[] | null = null;
+	private filterTextCache: string = '';
+	
 	constructor(props: IShowMembersProps) {
 		super(props);
 
@@ -43,6 +46,63 @@ export class ShowMembers extends React.Component<IShowMembersProps, IShowMembers
 			filterT: '',
 			memeberList: this.props.memsList,
 		};
+	}
+	
+	componentDidUpdate(prevProps: IShowMembersProps, prevState: IShowMembersState) {
+		// 当成员列表或过滤文本变化时，重新计算过滤后的列表
+		if (prevProps.memsList !== this.props.memsList || prevState.filterT !== this.state.filterT) {
+			this.filteredListCache = null;
+			this.filterTextCache = '';
+		}
+	}
+	
+	shouldComponentUpdate(nextProps: IShowMembersProps, nextState: IShowMembersState) {
+		// 只在成员列表、过滤文本或角色变化时才更新
+		// 简化检查：直接比较数组引用和长度
+		const memsListChanged = this.props.memsList !== nextProps.memsList ||
+			this.props.memsList.length !== nextProps.memsList.length;
+		
+		return memsListChanged ||
+			nextState.filterT !== this.state.filterT ||
+			nextProps.role !== this.props.role ||
+			nextProps.canViewInfo !== this.props.canViewInfo;
+	}
+	
+	// 获取过滤后的成员列表（带缓存）
+	getFilteredList = (): GroupMemItem[] => {
+		// 如果 props.memsList 为空或未定义，直接返回空数组
+		if (!this.props.memsList || this.props.memsList.length === 0) {
+			return [];
+		}
+		
+		if (this.filteredListCache && this.filterTextCache === this.state.filterT) {
+			return this.filteredListCache;
+		}
+		
+		const filterText = this.state.filterT.trim();
+		if (!filterText) {
+			this.filteredListCache = this.props.memsList;
+			this.filterTextCache = filterText;
+			return this.filteredListCache;
+		}
+		
+		const filtered = this.props.memsList.filter((item: GroupMemItem) => {
+			let nameMember = item.nickname;
+			if (item.userId == systemStore.userId && chatStore.currentChatData.nickname) {
+				nameMember = chatStore.currentChatData.nickname;
+			}
+			const myFriend = friendStore.friendMap.get(Number(item.userId));
+			if (myFriend && myFriend.remarkName) {
+				nameMember = myFriend.remarkName;
+			}
+			
+			return item.nickname.indexOf(filterText) > -1 ||
+				(nameMember && nameMember.indexOf(filterText) > -1);
+		});
+		
+		this.filteredListCache = filtered;
+		this.filterTextCache = filterText;
+		return filtered;
 	}
 	switchCreatNotice = () => {
 		this.setState((state) => ({
@@ -64,36 +124,11 @@ export class ShowMembers extends React.Component<IShowMembersProps, IShowMembers
 	};
 	searchDom: Input | null;
 	changeFilterText = (e?: React.ChangeEvent<HTMLInputElement>) => {
-		let filterText = e ? e.target.value : this.state.filterT;
-		if (filterText.trim() == '') {
-			this.setState({ memeberList: this.props.memsList, filterT: '' });
-		} else {
-			let msMemeberList = this.props.memsList.filter((item: any) => {
-				// let itemname = item.remarkName?item.remarkName:item.toNickname;
-
-				let nameMember = item.nickname;
-				if (item.userId == systemStore.userId && chatStore.currentChatData.nickname) {
-					nameMember = chatStore.currentChatData.nickname;
-				}
-				const myFriend = friendStore.friendMap.get(Number(item.userId));
-				if (myFriend && myFriend.remarkName) {
-					nameMember = myFriend.remarkName;
-				}
-
-				if (item.nickname.indexOf(filterText) > -1 ||
-					(nameMember && nameMember.indexOf(filterText) > -1)) {
-					return true;
-				} else {
-					return false;
-				}
-
-			});
-
-			this.setState({
-				filterT: e ? e.target.value : this.state.filterT,
-				memeberList: msMemeberList
-			});
-		}
+		const filterText = e ? e.target.value : this.state.filterT;
+		// 清除缓存，让 getFilteredList 重新计算
+		this.filteredListCache = null;
+		this.filterTextCache = '';
+		this.setState({ filterT: filterText });
 	};
 	removeMemFun = async (userId: string) => {
 		const res = await groupStore.removeMem(userId)
@@ -161,15 +196,14 @@ export class ShowMembers extends React.Component<IShowMembersProps, IShowMembers
 
 	// }
 
-	renderItem = ({ columnIndex, rowIndex, key, style }: any) => {
+	renderItem = ({ columnIndex, rowIndex, key, style, filteredList }: any) => {
 		const tIndex = rowIndex * 5 + columnIndex;
-		if (tIndex >= this.props.memsList.length) {
+		if (tIndex >= filteredList.length) {
 			return null;
 		}
-		const item = this.state.memeberList[tIndex];
+		const item = filteredList[tIndex];
 		if (item) {
 			let nameMember = item.nickname ? item.nickname : '';
-			// let filterText = this.state.filterT;
 
 			if (item.userId == systemStore.userId && chatStore.currentChatData.nickname) {
 				nameMember = chatStore.currentChatData.nickname;
@@ -179,12 +213,10 @@ export class ShowMembers extends React.Component<IShowMembersProps, IShowMembers
 				nameMember = myFriend.remarkName;
 			}
 			const classNameEdit = this.getRoleClass(item.role);
-			// if (!filterText) {
 			return (
 				<span
 					key={key}
 					style={style}
-				// onClick={() => this.props.showUserInfo(item.userId.toString())}
 				>
 					<GroupMemViewItem
 						showUserInfo={() => this.props.showUserInfo(item.userId.toString())}
@@ -237,30 +269,46 @@ export class ShowMembers extends React.Component<IShowMembersProps, IShowMembers
 		// }
 	};
 	renderList = () => {
-		const pArr: any = []
-		for (let i = 0; i < (this.props.memsList.length / 5); i++) {
-			const sArr: any = []
-			for (let j = 0; j < 5; j++) {
-				sArr.push(j)
-			}
-			pArr.push(sArr)
+		const filteredList = this.getFilteredList();
+		
+		// 如果没有成员，显示"暂无成员"
+		if (!filteredList || filteredList.length === 0) {
+			return <span className="no-data-wraper">{tr(101)}</span>;
 		}
+		
+		const rowCount = Math.ceil(filteredList.length / 5);
+		const rows: JSX.Element[] = [];
+		
+		// 只调用一次 getFilteredList，然后传递给 renderItem
+		for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+			const rowItems: JSX.Element[] = [];
+			for (let colIndex = 0; colIndex < 5; colIndex++) {
+				const tIndex = rowIndex * 5 + colIndex;
+				if (tIndex < filteredList.length) {
+					const item = this.renderItem({ 
+						columnIndex: colIndex, 
+						rowIndex: rowIndex, 
+						key: `${rowIndex}-${colIndex}`, 
+						style: {},
+						filteredList: filteredList
+					});
+					if (item) {
+						rowItems.push(item);
+					}
+				}
+			}
+			if (rowItems.length > 0) {
+				rows.push(
+					<div key={rowIndex} style={{ display: 'flex', justifyContent: 'space-between' }}>
+						{rowItems}
+					</div>
+				);
+			}
+		}
+		
 		return (
 			<div style={{ overflowY: 'auto', overflowX: 'hidden' }}>
-				{/* {JSON.stringify(pArr)} */}
-				{
-					pArr.map((item: any, key: number) => {
-						return (
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								{
-									item.map((subItem: number, subIndex: number) => {
-										return this.renderItem({ columnIndex: subIndex, rowIndex: key, key: `${key}-${subIndex}`, style: {} })
-									})
-								}
-							</div>
-						)
-					})
-				}
+				{rows}
 			</div>
 		)
 	}

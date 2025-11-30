@@ -98,7 +98,7 @@ export class CreateGroupList extends React.Component<ICreateGroupListProps, ICre
 							left: '13px',
 							top: '-3px',
 							// color: '#2c2f36',
-							color: '#222222',
+							color: 'var(--primary-text-color)',
 							lineHeight: '20px',
 							fontSize: '14px'
 						}}

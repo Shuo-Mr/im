@@ -19,6 +19,7 @@ export interface ISelectFriendProps {
 	isShow: boolean;
 	selectConfirm: (list: FriendItem[]) => void;
 	cancel: () => void;
+	okText?: string;
 }
 
 export function SelectFriend(props: ISelectFriendProps) {
@@ -37,9 +38,9 @@ export function SelectFriend(props: ISelectFriendProps) {
 				key={key}
 				style={{ display: 'flex' }}
 				onClick={() => {
-					let _friendList = friendList;
+					let _friendList = friendList.slice();
 					_friendList[index].isSelected = _friendList[index].isSelected ? false : true;
-					updateFriend((m) => [..._friendList]);
+					updateFriend(_friendList);
 				}}
 			>
 				<div style={{ display: 'flex' }}>
@@ -62,10 +63,10 @@ export function SelectFriend(props: ISelectFriendProps) {
 		<Modal
 			mask={false}
 			centered
-			title="选择发送名片"
+			title={props.title}
 			visible={props.isShow}
 			width={340}
-			okText={'确认发送'}
+			okText={props.okText || '确定'}
 			cancelText={'取消'}
 			onOk={() => {
 				const selectList = friendList.filter((item) => item.isSelected);

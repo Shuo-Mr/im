@@ -4,8 +4,8 @@ import Button from 'antd/es/button';
 import Tag from 'antd/es/tag';
 import Divider from 'antd/es/divider';
 import Checkbox from 'antd/es/checkbox';
-// import { List as VList } from 'react-virtualized/dist/es/List';
-// import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer';
+import { List as VList } from 'react-virtualized/dist/es/List';
+import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer';
 
 import { FriendItem } from '../../interface/IFriend';
 import { AvatorWithPhoto } from '../../component/avatorWithPhoto/AvatorWithPhoto';
@@ -39,6 +39,9 @@ export interface IMemberSelectState {
 }
 
 export class MemberSelect extends React.Component<IMemberSelectProps, any> {
+	private filteredListCache: any[] | null = null;
+	private filterTextCache: string = '';
+	
 	constructor(props: IMemberSelectProps) {
 		super(props);
 		this.state = {
@@ -46,53 +49,99 @@ export class MemberSelect extends React.Component<IMemberSelectProps, any> {
 			msMemeberList: props.memeberList
 		};
 	}
-	changeFilterText = (filterText: string) => {
-		if (filterText.trim() == '') {
-			this.setState({ msMemeberList: this.props.memeberList, filterT: '' });
-		} else {
-			let msMemeberList = this.props.memeberList.filter((item: any) => {
-				// let itemname = item.remarkName?item.remarkName:item.toNickname;
-				// console.log('进来了吗',item)
-				if ( (item.remarkName && ( item.remarkName.indexOf(filterText) != -1 || filterText.indexOf( item.remarkName) != -1))||
-				(item.toNickname && ( item.toNickname.indexOf(filterText) != -1 || filterText.indexOf( item.toNickname) != -1))
-				||(item.nickname && ( item.nickname.indexOf(filterText) != -1 || filterText.indexOf( item.nickname) != -1))) { 
-					return true;
-				 }else {
-					return false;
-				}
-
-			});
-			this.setState({
-				filterT: filterText,
-				msMemeberList
-			});
+	
+	componentDidUpdate(prevProps: IMemberSelectProps, prevState: any) {
+		// 当成员列表或过滤文本变化时，重新计算过滤后的列表
+		if (prevProps.memeberList !== this.props.memeberList || prevState.filterT !== this.state.filterT) {
+			this.filteredListCache = null;
+			this.filterTextCache = '';
 		}
+		
+		// 当选中列表变化时，更新虚拟列表
+		if (prevProps.selectedList.length !== this.props.selectedList.length) {
+			if (this.list) {
+				setTimeout(() => {
+					this.list && this.list.forceUpdateGrid();
+				}, 100);
+			}
+		}
+	}
+	
+	// 获取过滤后的成员列表（带缓存）
+	getFilteredList = (): any[] => {
+		// 如果 props.memeberList 为空或未定义，直接返回空数组
+		if (!this.props.memeberList || this.props.memeberList.length === 0) {
+			return [];
+		}
+		
+		// 使用缓存
+		if (this.filteredListCache && this.filterTextCache === this.state.filterT) {
+			return this.filteredListCache;
+		}
+		
+		const filterText = this.state.filterT.trim();
+		if (!filterText) {
+			this.filteredListCache = this.props.memeberList;
+			this.filterTextCache = filterText;
+			return this.props.memeberList;
+		}
+		
+		// 优化过滤逻辑：只检查包含关系，不检查反向包含
+		const filtered = this.props.memeberList.filter((item: any) => {
+			const remarkName = item.remarkName || '';
+			const toNickname = item.toNickname || '';
+			const nickname = item.nickname || '';
+			
+			return remarkName.indexOf(filterText) !== -1 ||
+				toNickname.indexOf(filterText) !== -1 ||
+				nickname.indexOf(filterText) !== -1;
+		});
+		
+		this.filteredListCache = filtered;
+		this.filterTextCache = filterText;
+		return filtered;
+	}
+	
+	changeFilterText = (filterText: string) => {
+		// 清除缓存，让 getFilteredList 重新计算
+		this.filteredListCache = null;
+		this.filterTextCache = '';
+		this.setState({ filterT: filterText });
 	};
 
 	renderItem = ({ index, key, style }: any) => {
-		let selectedId = this.props.selectedList.map((item) => item[this.props.config.id]);
-		let item = this.state.msMemeberList[index];
-		let notSelect = this.props.notSelectList.indexOf(String(item[this.props.config.id])) > -1;
-		style = { ...style, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", display: 'flex' }
-
-		const myFriend = friendStore.friendMap.get(Number(item.userId))
-		if (myFriend && myFriend.remarkName) {
-			item['remarkName'] = myFriend.remarkName;
+		const filteredList = this.getFilteredList();
+		if (index >= filteredList.length) {
+			return null;
 		}
+		
+		// 缓存 selectedId 数组，避免每次渲染都重新计算
+		const selectedId = this.props.selectedList.map((item) => item[this.props.config.id]);
+		const item = filteredList[index];
+		const notSelect = this.props.notSelectList.indexOf(String(item[this.props.config.id])) > -1;
+		const finalStyle = { ...style, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", display: 'flex' };
+
+		// 获取备注名
+		const myFriend = friendStore.friendMap.get(Number(item.userId));
+		const displayName = myFriend && myFriend.remarkName 
+			? myFriend.remarkName 
+			: (item['remarkName'] ? item['remarkName'] : (item['toNickname'] ? item['toNickname'] : item[this.props.config.name]));
+		
 		return (
 			<div
 				key={key}
-				style={style}
+				style={finalStyle}
 				onClick={() => {
 					if (notSelect) {
 						return;
 					}
 					this.props.selectItem(item);
-					// let listDom = this.list;
-					// let timer = setTimeout(() => {
-					// 	clearTimeout(timer);
-					// 	listDom && listDom.forceUpdateGrid()
-					// }, 100);
+					// 更新虚拟列表
+					if (this.list) {
+						setTimeout(() => {
+							this.list && this.list.forceUpdateGrid();
+						}, 100);
+					}
 				}}
 				className="item"
 			>
@@ -109,7 +158,7 @@ export class MemberSelect extends React.Component<IMemberSelectProps, any> {
 						classN="head"
 					/>
 					<span style={{ marginLeft: '4px' }}>
-						{item['remarkName'] ? item['remarkName'] : (item['toNickname'] ? item['toNickname'] : item[this.props.config.name])}
+						{displayName}
 					</span>
 				</span>
 			</div>
@@ -148,15 +197,14 @@ export class MemberSelect extends React.Component<IMemberSelectProps, any> {
 	//         </div>
 	//     )
 	// }
-	componentWillReceiveProps(nextProps: IMemberSelectProps) {
-		if (nextProps.selectedList.length != this.props.selectedList.length) {
-			let listDom = this.list;
-			let timer = setTimeout(() => {
-				clearTimeout(timer);
-				listDom && listDom.forceUpdateGrid()
-			}, 100);
-		}
+	
+	shouldComponentUpdate(nextProps: IMemberSelectProps, nextState: any) {
+		// 只在成员列表、选中列表、过滤文本变化时才更新
+		return this.props.memeberList !== nextProps.memeberList ||
+			this.props.selectedList.length !== nextProps.selectedList.length ||
+			this.state.filterT !== nextState.filterT;
 	}
+	
 	list: any;
 	public render() {
 		const {
@@ -222,7 +270,7 @@ export class MemberSelect extends React.Component<IMemberSelectProps, any> {
 					<Divider type="vertical" style={{ height: '100%', margin: '0' }} />
 					<div className="right-block">
 						<Input
-							placeholder="搜索联系人1"
+							placeholder="搜索联系人"
 							maxLength={30}
 							prefix={<Icon type="search" style={{ color: '#8CA6F5' }} />}
 							allowClear
@@ -230,26 +278,24 @@ export class MemberSelect extends React.Component<IMemberSelectProps, any> {
 							onChange={(e) => this.changeFilterText(e.target.value)}
 						/>
 						
-						<div className="members-wraper" style={{ overflowY: 'auto', display: 'block' }}>
-							{this.state.msMemeberList.map((item: any, key: number) => {
-								return this.renderItem({ index: key, key, style: {} })
-							})}
+						<div className="members-wraper" style={{ flex: 1, minHeight: 0 }}>
+							<AutoSizer>
+								{({ height, width }) => {
+									const filteredList = this.getFilteredList();
+									return (
+										<VList
+											ref={(ref) => (this.list = ref)}
+											width={width}
+											height={height}
+											overscanRowCount={10}
+											rowCount={filteredList.length}
+											rowHeight={48}
+											rowRenderer={this.renderItem}
+										/>
+									);
+								}}
+							</AutoSizer>
 						</div>
-						{/* <AutoSizer>
-							{({ height, width }) => {
-								return (
-									<VList
-										ref={(ref) => (this.list = ref)}
-										width={width}
-										height={height}
-										overscanRowCount={20}
-										rowCount={this.state.msMemeberList ? this.state.msMemeberList.length : 0}
-										rowHeight={48}
-										rowRenderer={this.renderItem}
-									/>
-								);
-							}}
-						</AutoSizer> */}
 					</div>
 				</div>
 			</Modal>

@@ -1,0 +1,200 @@
+// 主题样式文件 - 使用 CSS 变量（全局使用）
+
+// 系统默认主题（基础变量）
+:root {
+  --primary-color: #3468f5;
+  // 右侧颜色
+  --secondary-color: #fff;
+  --third-color: #d0e6fd;
+
+  // 信息
+  --message-primary-color: #d0e6fd;
+  --message-secondary-color: #e2e2e2;
+
+  --primary-text-color: #222222;
+  --secondary-text-color: #666666;
+  --sidebar-color: #fbfcfe;
+  --background-color: #ffffff;
+  --border-color: #EFEFEF;
+
+  --input-color: #2550c3;
+  --on-input-color: #e2e2e2;
+}
+
+// 暖色护眼主题
+html.theme-warm {
+  --primary-color: #B88D24;
+  --secondary-color: #E3D0A0;
+  --third-color: #E3D0A0;
+
+
+  --message-primary-color: #B88D24;
+  --message-secondary-color: #f5e6d3;
+
+  --primary-text-color: #333333;
+  --secondary-text-color: #666666;
+  --sidebar-color: #EFE2C0;
+  --background-color: #F5E6D3;
+  --border-color: #B88D24;
+
+  --input-color: #EFE2C0;
+  --on-input-color: #B88D24;
+
+}
+
+// 深色模式主题
+html.theme-dark {
+  --primary-color: #1C222C;
+  --secondary-color: #232E40;
+  --third-color: #232E40;
+
+  --message-primary-color: #8998AD;
+  --message-secondary-color: #333E50;
+
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #cccccc;
+  --sidebar-color: #333E50;
+  --background-color: #1A1A1A;
+  --border-color: #495362;
+
+  --input-color: #333E50;
+  --on-input-color: #1C222C;
+
+}
+
+// 应用主题变量到全局样式
+html {
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// 侧边栏样式
+.sidebar,
+.left-list,
+.setting-left {
+  background-color: var(--sidebar-color);
+  color: var(--primary-text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// 主色调应用示例
+.primary-color {
+  color: var(--primary-color);
+}
+
+.primary-bg {
+  background-color: var(--primary-color);
+}
+
+// 次色调应用示例
+.secondary-color {
+  color: var(--secondary-color);
+}
+
+.secondary-bg {
+  background-color: var(--secondary-color);
+}
+
+// 文字颜色应用示例
+.primary-text {
+  color: var(--primary-text-color);
+}
+
+.secondary-text {
+  color: var(--secondary-text-color);
+}
+
+// 边框颜色应用示例
+.border-color {
+  border-color: var(--border-color);
+}
+
+// Ant Design Drawer 背景色
+.ant-drawer-content {
+  background-color: var(--secondary-color);
+}
+
+// Ant Design Form Label 文字颜色
+.ant-form-item-label>label {
+  color: var(--primary-text-color)!important;
+}
+
+// Ant Design Collapse Header 文字颜色
+.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+  color: var(--primary-text-color)!important;
+}
+
+// Ant Design Modal 样式
+
+.ant-modal {
+  .ant-modal-content {
+    background-color: var(--secondary-color);
+    color: var(--primary-text-color);
+    .ant-modal-close {
+      color: var(--primary-text-color);
+    }
+  }
+  .ant-modal-header {
+    background-color: var(--secondary-color);
+    color: var(--primary-text-color);
+    border-bottom: 1px solid var(--border-color);
+    .ant-modal-title {
+      color: var(--primary-text-color);
+    }
+  }
+  .ant-radio-button-wrapper {
+    background-color: var(--secondary-color);
+    color: var(--primary-text-color);
+  }
+} 
+
+
+// Right Content 背景色
+.right-content {
+  background-color: var(--secondary-color);
+}
+
+.ant-drawer-content-wrapper {
+  .ant-drawer-content {
+    background-color: var(--secondary-color);
+  }
+  .ant-drawer-header {
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    .ant-drawer-title {
+      color: var(--primary-text-color);
+    }
+  }
+}
+
+.ant-input-affix-wrapper {
+  color: var(--primary-text-color);
+
+  .ant-input-prefix {
+    color: var(--primary-text-color);
+  }
+  .ant-input-suffix {
+    color: var(--secondary-text-color);
+  }
+  .ant-input {
+    background-color: var(--secondary-color);
+    color: var(--primary-text-color);
+  }
+}
+
+body {
+  color: var(--primary-text-color)!important;
+}
+
+.ant-pagination-item a {
+  color: var(--primary-text-color)!important;
+}
+
+.ant-pagination-item-link {
+  color: var(--primary-text-color)!important;
+}
+
+.ant-pagination-item-ellipsis {
+  color: var(--primary-text-color)!important;
+}

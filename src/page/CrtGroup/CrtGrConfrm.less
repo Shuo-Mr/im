@@ -11,7 +11,7 @@
         position: relative;
         position: relative;
         text-align: center;
-        border-bottom: 1px solid #EFEFEF;
+        border-bottom: 1px solid var(--border-color);
 
         .next {
             position: absolute;
@@ -60,11 +60,11 @@
             outline   : none;
             box-shadow: none;
             border    : none;
-            background: white !important;
+            background: var(--secondary-color) !important;
             //  color     : #2C2F36 !important;
-             color     : #222222 !important;
+             color     : var(--primary-text-color) !important;
             border-style: none;
-            border-bottom: 1px solid #EFEFEF;
+            border-bottom: 1px solid var(--border-color);
            
             }
      }
@@ -76,21 +76,9 @@
         overflow-y: hidden;
 
         .list-items {
-            // display: flex;
             justify-content: end;
             align-items: center;
             padding: 8px 24px;
-            // .avator {
-            //     margin-right: 8px;
-            // }
-            // .name {
-            //     position: "relative";
-            //     left: "40px";
-            //     top: "-30px";
-            //     color: "#2c2f36";
-            //     line-height:"20px";
-            //     font-size:"14px"
-            // }    
 
         }
     }

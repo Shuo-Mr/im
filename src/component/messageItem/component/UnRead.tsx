@@ -50,7 +50,7 @@ export default function UnRendList({ messageId, unreadCount }: any) {
     }
     let tip = unReadNum == 0 || unreadCount == 0 ? '全部已读' : `${unreadCount || unReadNum}人未读`;
     return (
-    (tip==='全部已读') ? <div style={{fontSize: "10px",cursor: "pointer",color: "#969ba5"}}>{tip}</div> :
+    (tip==='全部已读') ? <div style={{fontSize: "10px",cursor: "pointer",color: "var(--secondary-text-color)"}}>{tip}</div> :
             <Popover trigger='click' placement="left" content={loading ? <Spin size="small" /> : content} title="消息未读成员列表">
                 <div className='message-body-read' onClick={onClickReadInfo}> {tip}</div>
             </Popover>

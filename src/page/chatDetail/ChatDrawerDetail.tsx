@@ -252,8 +252,7 @@ export default class ChatDrawerDetail extends React.Component<IChatDrawerDetailP
 						<div
 							style={{
 								fontSize: '12px',
-								// fontFamily: 'AlibabaPuHuiTiR',
-								color: 'rgba(150,155,165,1)',
+								color: 'var(--secondary-text-color)',
 								lineHeight: '17px',
 								margin: '14px 0px 4px 0px'
 							}}

@@ -39,7 +39,7 @@
 			width: 10px;
 		}
 		.name {
-			color: #8e97a1;
+			color: var(--secondary-text-color);
 			cursor: pointer;
 			font-size: 12px;
 			position: relative;
@@ -50,7 +50,7 @@
 				display: none;
 			}
 			&:hover {
-				color: #1890ff;
+				color: var(--primary-color);
 				.mention-but {
 					display: none;
 					display: inline-block;
@@ -71,9 +71,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: flex-start;
-			// color: #2c2f36;
 			font-size: 14px;
-			color: #222222;
+			color: var(--primary-text-color);
 			.text-wraper{
 				max-width: 100%;
 				&.top {
@@ -94,7 +93,7 @@
 					border-bottom-width:5px;
 					border-bottom-color:currentColor;
 					border-radius:0 0 0 20px;
-					 color:#EFEFEF;
+					color: var(--message-secondary-color);
 				}
 				.video-item{
 					:after{
@@ -108,14 +107,6 @@
 				.mes-file-wraper{
 					background-color: #EFEFEF;
 				}
-				// .mobild-mes {
-				// 	padding: 8px 16px;
-				// 	margin-top: 4px;
-				// 	background: #EFEFEF;
-				// 	border-radius: 8px;
-				// 	position: relative;
-				// 	top: 7px;
-				// }
 				.message-style{
 					padding: 8px 16px;
 					margin-top: 4px;
@@ -134,14 +125,14 @@
 
 			.text-wraper {
 				display: inline-block;
-				background-color: #efefef;
+				background-color: var(--message-secondary-color);
 				padding: 8px 16px;
 				border-radius: 8px;
 				position: relative;
 				cursor: pointer;
 				.message-sendtext-sendtimer{
 					font-size: 10px;
-					color: #969BA5
+					color: var(--secondary-text-color)
 				}
 				&.transparent {
 					background-color: transparent;
@@ -236,7 +227,8 @@
 		}
 		.text-wraper {
 			top: 0px;
-			background-color: #d0e6fd;
+			background-color: var(--message-primary-color);
+			color: var(--primary-text-color);
 			max-width: 100%;
 			:after{
 				content:'';
@@ -252,7 +244,7 @@
 				border-bottom-width:5px;
 				border-bottom-color:currentColor;
 				border-radius:0 0 30px 0;
-				color: #d0e6fd;
+				color: var(--message-primary-color);
 			}
 			.video-item{
 				:after{
@@ -261,21 +253,15 @@
 				}
 			}
 			.card-mes{
-				background-color:  #d0e6fd;
+				background-color: var(--message-primary-color);
 			}
 			.mes-file-wraper{
-				background-color:  #d0e6fd;
+				background-color: var(--message-primary-color);
 			}
-			// .mobild-mes {
-			// 	padding: 8px 16px;
-			// 	margin-top: 4px;
-			// 	background: #d0e6fd;
-			// 	border-radius: 8px;
-			// }
 			.message-style{
 				padding: 8px 16px;
 				margin-top: 4px;
-				background: #d0e6fd;
+				background-color: var(--message-primary-color);
 				border-radius: 8px;
 			}
 
@@ -306,8 +292,7 @@
 		padding: 8px 16px;
 		border-radius: 12px;
 		font-size: 12px;
-		// color: #2c2f36;
-		color: #222222;
+		color: var(--primary-text-color);
 		.left {
 			display: flex;
 			flex: 1;
@@ -326,18 +311,18 @@
 	}
 
 	.text-wraper {
-		background-color: #d0e6fd;
+		background-color: var(--message-primary-color);
 	}
 
 	.card-mes {
 		padding: 8px;
 		width: 204px;
-		border: 1px solid #ececec;
+		border: 1px solid var(--border-color);
 		border-radius: 4px;
 		cursor: pointer;
-		text-Align:start;
+		text-align: start;
 		.top {
-			border-bottom: 1px solid #ececec;
+			border-bottom: 1px solid var(--border-color);
 			padding: 4px;
 			margin-bottom: 8px;
 			text-align: start;
@@ -406,7 +391,7 @@
 			max-height: 18px;
 		}
 		&.send {
-			background-color: #d0e6fd ;
+			background-color: var(--message-primary-color) ;
 		}
 	}
 
@@ -432,7 +417,7 @@
 }
 .transmit-message{
 	width: 180px;
-    background-color: #fff;
+    background-color: var(--secondary-color);
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -445,17 +430,17 @@
 	}
 	.title{
 		line-height: 32px;
-		border-bottom: 1px solid #e2e2e2;
+		border-bottom: 1px solid var(--border-color);
 		font-size: 12px;
 		margin-bottom: 8px;
-		color: #b7b7b7;
+		color: var(--secondary-text-color);
 		width: 148px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 	.title:last-child{
-		border-top: 1px solid #e2e2e2;
+		border-top: 1px solid var(--border-color);
 		border-bottom: none;
 		margin: 0
 	}
@@ -485,8 +470,8 @@
 	}
 }
 .message-replay{
-	color: #969ba5;
-	border-bottom: #969ba5 solid 1px
+	color: var(--secondary-text-color);
+	border-bottom: var(--border-color) solid 1px
 }
 // .imag-txt-content{
 // 	width: 50%;

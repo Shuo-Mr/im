@@ -853,7 +853,7 @@ export default class SendBoard extends React.Component<ISendBoardProps, ISendBoa
 	};
 	defaultStyles = {
 		control: {
-			backgroundColor: '#FBFCFE',
+			backgroundColor: 'var(--secondary-color)',
 
 			fontSize: 14,
 			fontWeight: 'normal'
@@ -915,7 +915,7 @@ export default class SendBoard extends React.Component<ISendBoardProps, ISendBoa
 			item: {
 				padding: '4px 12px',
 				'&focused': {
-					backgroundColor: '#D0E6FD'
+					backgroundColor: 'var(--secondary-color)'
 				}
 			}
 		}

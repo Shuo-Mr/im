@@ -225,7 +225,7 @@ function createWindow() {
   })
 
   // 调试模式
-// win.webContents.openDevTools({mode:'right'})
+  win.webContents.openDevTools({mode:'right'})
 
 
 

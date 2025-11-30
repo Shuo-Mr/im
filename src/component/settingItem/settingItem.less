@@ -4,7 +4,7 @@
     display    : block;
     line-height: 48px;
     // color      : #2C2F36;
-    color: #222222;
+    color: var(--primary-text-color);
     display    : flex;
     align-items: center;
     -webkit-user-drag: none;
@@ -17,7 +17,7 @@
      -webkit-user-drag: none;
     }
     &.selected{
-        background: #D1E9FD
+        background: var(--secondary-color);
     }
     .header {
         width      : 24px;
@@ -27,7 +27,7 @@
     }
 
     &:hover {
-        background: #D1E9FD
+        background: var(--secondary-color);
     }
 
     .name {
@@ -36,19 +36,18 @@
     }
 
     .item-right {
-        border-bottom: 1px solid rgba(239, 239, 239, 1);
+        border-bottom: 1px solid var(--border-color);
         display      : flex;
         flex         : 1;
         padding-right: 12px;
         .name {
             display: flex;
             flex   : 1;
-            // color: #2C2F36;
-            color: #222222;
+            color: var(--primary-text-color);
         }
         .exact-text{
             margin-right: 4px;
-            color: #969BA5
+            color: var(--secondary-text-color);
         }
     }
 }

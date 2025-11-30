@@ -31,6 +31,7 @@
 }
 .members-wraper .member-box:before {
   background: #ececec;
+  color: var(--primary-text-color);
   position: absolute;
   top: -4px;
   right: 12px;

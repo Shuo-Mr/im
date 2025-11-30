@@ -9,6 +9,7 @@ import mainStore from '../store/MainStore';
 import chatStore from '../store/ChatStore';
 import { createGroupStore } from '../store/CreatGroupStore';
 import { requestStore } from '../store/RequestStore';
+import friendGroupStore from '../store/FriendGroupStore';
 import loadable from '../Loadable';
 // import Login from "../page/login/Login";
 // import Main from "../page/main/Main";
@@ -101,14 +102,30 @@ const stores = {
 	friendStore,
 	groupStore,
 	requestStore,
-	createGroupStore
+	createGroupStore,
+	friendGroupStore
 };
 @observer
 export default class AppRouter extends React.Component<any, any> {
 	constructor(props: any) {
 		super(props);
 		initBug();
+		// 初始化主题
+		this.initTheme();
 	}
+	
+	// 初始化主题
+	initTheme = () => {
+		const savedTheme = localStorage.getItem('_appearanceTheme') as 'default' | 'warm' | 'dark' | null;
+		const htmlElement = document.documentElement;
+		// 移除所有主题类
+		htmlElement.classList.remove('theme-warm', 'theme-dark');
+		// 如果是默认主题，不添加类名；否则添加对应的主题类
+		if (savedTheme && savedTheme !== 'default') {
+			htmlElement.classList.add(`theme-${savedTheme}`);
+		}
+	}
+	
 	render() {
 		return (
 			<Provider {...stores}>

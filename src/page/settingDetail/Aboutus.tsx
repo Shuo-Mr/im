@@ -27,7 +27,7 @@ class AboutUs extends React.Component<IAboutUsProps, IAboutUsState> {
             <div style={{ textAlign: 'center', marginTop: "122px" }}>
                 <img src={systemStore.projectLogo} style={{ ...styles }}></img>
                 <br></br>
-                <div style={{ fontSize: "18px", marginTop: "10px", WebkitUserSelect: 'none', fontWeight: 500 }} onClick={() => {
+                <div style={{ fontSize: "18px", marginTop: "10px", WebkitUserSelect: 'none', fontWeight: 500, color: 'var(--primary-text-color)' }} onClick={() => {
                     ipcRender && ipcRender.ipcRenderer && ipcRender.ipcRenderer.send('openCheckRemote', 'checkUpdate');
                 }}>
                     {'系统版本:' + rev}

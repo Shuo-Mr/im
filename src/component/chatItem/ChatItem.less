@@ -3,7 +3,7 @@
 
 .selected {
     .chat-item {
-        background: #E0F0FD;
+        background: var(--secondary-color);
     }
 }
 
@@ -16,7 +16,7 @@
     align-items: center;
     padding-right: 12px;
     border:none;
-    border-bottom: 1px solid #EFEFEF;
+    border-bottom: 1px solid var(--border-color);
     position: relative;
     &.top::after{
         content: ' ';
@@ -24,12 +24,12 @@
         top: 0;
         right: 0;
         border-left: 12px solid transparent;
-        border-top: 12px solid #d6d6d6;
+        border-top: 12px solid var(--border-color);
         width: 0;
         height: 0;
     }
     &:hover {
-        background: #E0F0FD;
+        background: var(--secondary-color);
     }
 
     .avator-wraper {
@@ -83,7 +83,7 @@
             font-size    : 14px;
             // font-family  : AlibabaPuHuiTiR;
             // font-family: "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
-            color        : rgba(44, 47, 54, 1);
+            color        : var(--primary-text-color);
             max-width    : 60%;
             overflow     : hidden;
             text-overflow: ellipsis;

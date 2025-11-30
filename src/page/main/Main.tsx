@@ -404,6 +404,9 @@ export default class Main extends React.Component<IMainProps, IMainState> {
 							onClick={this.toggleQuickReplySidebar}
 						/>
 					</Tooltip>
+
+				    {/* this */}
+					
 					<span className="main-avator">
 						<Popover
 							placement="bottomLeft"

@@ -374,10 +374,21 @@ export default class GroupDraweDetail extends React.Component<IGroupDraweDetailP
         }))
     }
     showGroupMems = () => {
+        // 延迟计算成员列表，避免在每次渲染时都计算
         this.setState(state => ({
             showGroupMems: true,
             manageListShow: false
         }))
+    }
+    
+    // 缓存排序后的成员列表
+    getSortedMembersList = () => {
+        const groupId = this.injected.chatStore.currentChat.id;
+        const memsList = this.injected.groupStore.groupMemberList.get(groupId);
+        if (!memsList) {
+            return [];
+        }
+        return Array.from(memsList.values()).sort(this.groupMemesSort);
     }
     SwitchGroupMems = () => {
         this.setState(state => ({
@@ -447,7 +458,7 @@ export default class GroupDraweDetail extends React.Component<IGroupDraweDetailP
         if (this.friendArray) {
             if (groupMemData) {
                 this.friendArray = Array.from(groupMemData.keys()).map(item => item);
-                console.log('IdArray', this.friendArray, groupMemData.keys(), this.injected.friendStore.friendList);
+                // console.log('IdArray', this.friendArray, groupMemData.keys(), this.injected.friendStore.friendList);
             }
         }
         this.modalData = {
@@ -711,8 +722,8 @@ export default class GroupDraweDetail extends React.Component<IGroupDraweDetailP
             memeberList,
             isChangeLoading,
         } = this.state;
-        const memsList = this.injected.groupStore.groupMemberList.get(groupId);
-        const _memsList = memsList?Array.from(memsList.values()).sort(this.groupMemesSort):[]
+        // 获取排序后的成员列表（始终计算，因为 ShowMembers 组件需要）
+        const _memsList = this.getSortedMembersList()
         return (
             <>
                 <Drawer
@@ -784,7 +795,6 @@ export default class GroupDraweDetail extends React.Component<IGroupDraweDetailP
                                     {
                                         this.getMembers(_memsList, groupId)
                                     }
-                                    {/* <div onClick={this.switchShowGrMem} className="show-control"> */}
                                     <div onClick={this.showGroupMems} className="show-control">
                                         {this.state.showNumber > 0 && memNum > this.defaultShowNum
                                             ? tr(126)
@@ -855,7 +865,7 @@ export default class GroupDraweDetail extends React.Component<IGroupDraweDetailP
                             }
                             {
                                 <div className="box-parter">
-                                    <div style={{ fontSize: "12px", color: "rgba(150,155,165,1)", lineHeight: "17px", margin: "14px 0px 4px 0px" }}>对话设置</div>
+                                    <div style={{ fontSize: "12px", color: "var(--secondary-text-color)", lineHeight: "17px", margin: "14px 0px 4px 0px" }}>对话设置</div>
                                     <div className="list-item-common click"  >
                                         <div className="left" style={{ lineHeight: "20px", margin: "10px 0px" }}>
                                             置顶聊天

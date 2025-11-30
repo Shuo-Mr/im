@@ -75,6 +75,13 @@ export default class MySetting extends React.Component<IMySettingProps, IMySetti
 						<IconImgEdit img={require('../../assets/image/right-icon.png')} size={12} marginSize={4} />
 					</span>
 				</NavLink>
+				<SettingItem
+					urlKey={this.props.match.url + '/appearance'}
+					onClick={() => mainStore.changeShowDetailType(detailType.setting)}
+					name="外观设置"
+					exactName=""
+					img={require('./../../assets/image/theme.png')}
+				/>
 				{/* <SettingItem urlKey={this.props.match.url + '/clearCache'} name={tr(5)} exactName="1.16M" img={require('./../../assets/image/clear-cache.png')} /> */}
 				<SettingItem
 					urlKey={this.props.match.url + '/clearHistory'}

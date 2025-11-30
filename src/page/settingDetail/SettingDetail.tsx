@@ -12,6 +12,7 @@ import PasChange from './PasChange';
 import TipChange from './TipChange';
 import MyInfo from './MyInfo';
 import AboutUs from './Aboutus';
+import AppearanceSetting from './AppearanceSetting';
 import { NoneData } from '../../component/noneDataView/NoneDataView';
 
 
@@ -47,6 +48,7 @@ export default class SettingDetail extends React.Component<ISettingDetailProps, 
         <Route exact path="/main/my/languageChange" component={LanguageChange} />
         <Route exact path="/main/my/pasChange" component={PasChange} />
         <Route exact path="/main/my/tipChange" component={TipChange} />
+        <Route exact path="/main/my/appearance" component={AppearanceSetting} />
         <Route exact path="/main/my/info" component={MyInfo} />
         <Route exact path="/main/my/aboutus" component={AboutUs} />
         <Route component={NoneData} />

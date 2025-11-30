@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import AppRouter from './router/AppRouter';
 import './index.less';
 import './index/global_mobile.less';
+import './appearance-theme.less';
 import 'antd/dist/antd.css';
 
 

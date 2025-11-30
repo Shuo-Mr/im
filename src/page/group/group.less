@@ -7,6 +7,9 @@
 
   .ant-collapse {
     height: calc(100% - 45px);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--sidebar-color);
   }
 
   .list-item {
@@ -15,10 +18,10 @@
     -webkit-user-drag: none;
     .name{
       // color: #2C2F36;
-      color: #222222;
+      color: var(--primary-text-color);
     }
     &:hover{
-      background-color: #f3f3f3;
+      background-color: var(--secondary-color);
     }
   }
 
@@ -34,49 +37,93 @@
   overflow: hidden;
   flex: 1;
   border: none;
-  border-bottom: 1px solid #EFEFEF;
+  border-bottom: 1px solid var(--border-color);
   -webkit-user-drag: none;
   .friend-name {
-        margin-left: 6px;
+    margin-left: 6px;
     flex: 1;
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
     // color: #2C2F36;
-    color: #222222;
+    color: var(--primary-text-color);
   }
   img{
     -webkit-user-drag: none;
   }
   &:hover {
-    background: #eeeff2;
+    background: var(--secondary-color);
+  }
+  &.selected {
+    background: var(--secondary-color);
   }
 }
-#contact-myfriend-list,#contact-newfriend-list{
+#contact-myfriend-list,#contact-newfriend-list,#contact-friendgroup-list{
   border: none;
 }
-#contact-newfriend-list.ant-collapse-item-active{
-  height: calc(100% - 46px);
+#contact-friendgroup-list .ant-collapse-header {
+  position: relative;
+  .ant-dropdown {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+#contact-friendgroup-list.ant-collapse-item-active {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   .ant-collapse-content {
-    height: calc(100% - 46px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .ant-collapse-content-box {
+    padding: 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+}
+#contact-newfriend-list.ant-collapse-item-active{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  .ant-collapse-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .ant-collapse-content-box {
     padding: 0px;
-    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 }
 
 #contact-myfriend-list.ant-collapse-item-active {
-  height: calc(100% - 92px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 
   .ant-collapse-content {
-    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .ant-collapse-content-box {
     padding: 0px;
-    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 }

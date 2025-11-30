@@ -51,7 +51,7 @@ export class GroupStore {
             }
             // message.error(`${chatData.name}群组成员更新失败`);
         }
-        console.log('----最新群组数据', JSON.stringify(this.groupMemberList))
+        // console.log('----最新群组数据', JSON.stringify(this.groupMemberList))
         localStorage.setItem('_groupList', JSON.stringify(this.groupMemberList))
     }
     @action getisForbiddenById = async (roomid: string) => {

@@ -625,6 +625,35 @@ export class IMSDK {
         return this._netService.commonPost(path, _data);
     }
 
+    deleteFriendGroup = (groupId: string) => {
+        let path = '/friendGroup/delete'
+        let _data: any = {
+            groupId,
+        }
+        _data = this._decorateData(_data, path)
+        return this._netService.commonPost(path, _data)
+    }
+
+    updateFriendGroup = (groupId: string, groupName: string) => {
+        let path = '/friendGroup/update'
+        let _data: any = {
+            groupId,
+            groupName,
+        }
+        _data = this._decorateData(_data, path)
+        return this._netService.commonPost(path, _data)
+    }
+
+    updateGroupUserList = (groupId: string, userIdListStr: string) => {
+        let path = '/friendGroup/updateGroupUserList'
+        let _data: any = {
+            groupId,
+            userIdListStr,
+        }
+        _data = this._decorateData(_data, path)
+        return this._netService.commonPost(path, _data)
+    }
+
     //获取好友信息
     getFriendInfoById = (friendId: string) => {
         let path = '/friends/get';

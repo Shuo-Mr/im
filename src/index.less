@@ -122,17 +122,16 @@ img {
 }
 
 .border-bottom-common {
-	border-bottom: 1px solid #efefef;
+	border-bottom: 1px solid var(--border-color);
 }
 
 .title-common {
-	// color: #2c2f36;
-	color: #000000;
+	color: var(--primary-text-color);
 	margin-right: 4px;
 }
 
 .sub-title {
-	color: #969ba5;
+	color: var(--secondary-text-color);
 }
 
 .list-item-desc {
@@ -140,12 +139,12 @@ img {
 	display: flex;
 	align-items: flex-start;
 	padding: 12px 0;
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 1px solid var(--border-color);
 
 	.left {
 		flex-shrink: 0;
 		width: 80px;
-		color: #666;
+		color: var(--secondary-text-color);
 		font-size: 14px;
 	}
 
@@ -173,7 +172,7 @@ img {
 		bottom: 0;
 		right: 0;
 		padding-left: 8px;
-		background: linear-gradient(to right, transparent, white 20%);
+		background: linear-gradient(to right, transparent, var(--secondary-color) 20%);
 		display: none;
 		/* 默认隐藏 */
 	}
@@ -195,8 +194,7 @@ img {
 	align-items: center;
 
 	.left {
-		// color: #2c2f36;
-		color: #222222;
+		color: var(--primary-text-color);
 	}
 
 	.right {
@@ -237,7 +235,8 @@ img {
 }
 
 #zmageControl {
-	background-color: rgba(255, 255, 255, .8) !important;
+	background-color: var(--secondary-color) !important;
+	opacity: 0.8;
 	top: 60px !important;
 }
 
